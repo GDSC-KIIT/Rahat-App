@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/common/ui_constants.dart';
+import 'package:rahat/components/wavePainter.dart';
 import 'package:rahat/views/homeScreen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -160,7 +161,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       )),
                 ),
-              )
+              ),
+              SizedBox(
+                height: UIConstants.fitToHeight(80, context),
+              ),
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: WavePainter())
             ],
           ),
         ),

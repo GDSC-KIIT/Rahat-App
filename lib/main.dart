@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xffF47216),
         scaffoldBackgroundColor: Colors.black
       ),
-      home: SignInScreen(),
+      home: SplashScreen(),
     );
   }
 }

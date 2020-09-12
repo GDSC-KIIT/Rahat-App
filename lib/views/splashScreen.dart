@@ -13,14 +13,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    startTime();
   }
 
   startTime() async {
     var duration = new Duration(seconds: 3);
-    return new Timer(duration, navigate);
+    return new Timer(duration, () {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) {
+        return SignInScreen();
+      }));
+    });
   }
 
-  void navigate() async {
+  void navigate() {
     // var auth = await AuthService.getSavedAuth();
     // if (auth != null) {
 
@@ -35,21 +41,19 @@ class _SplashScreenState extends State<SplashScreen> {
     //     return LoginPage();
     //   }));
     // }
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) {
-        return SignInScreen();
-      }));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Image.asset(
-        UIConstants.logo,
-        height: UIConstants.fitToHeight(250, context),
-        width: UIConstants.fitToWidth(250, context),
-        fit: BoxFit.cover,
+          child: Container(
+        child: Image.asset(
+          UIConstants.logo,
+          height: UIConstants.fitToHeight(200, context),
+          width: UIConstants.fitToWidth(200, context),
+          fit: BoxFit.contain,
+        ),
       )),
     );
   }
