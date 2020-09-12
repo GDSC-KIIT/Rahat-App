@@ -162,12 +162,12 @@ class _SignInScreenState extends State<SignInScreen> {
                       )),
                 ),
               ),
-              SizedBox(
-                height: UIConstants.fitToHeight(80, context),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: WavePainter())
+              // SizedBox(
+              //   height: UIConstants.fitToHeight(80, context),
+              // ),
+              // Container(
+              //   alignment: Alignment.bottomCenter,
+              //   child: WavePainter())
             ],
           ),
         ),
