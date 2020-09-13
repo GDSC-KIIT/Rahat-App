@@ -1,0 +1,18 @@
+<svg id="NasaWidget" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="100" viewBox="0 0 300 100">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.015" y1="0.5" x2="0" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f37335"/>
+      <stop offset="1" stop-color="#fdc830"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect id="Mask" width="300" height="100" rx="15" transform="translate(30 139)" fill="url(#linear-gradient)"/>
+    </clipPath>
+  </defs>
+  <rect id="Rectangle_26" data-name="Rectangle 26" width="300" height="100" rx="15" fill="url(#linear-gradient)"/>
+  <g id="Mask_Group_2" data-name="Mask Group 2" transform="translate(-30 -139)" clip-path="url(#clip-path)">
+    <circle id="Ellipse_11" data-name="Ellipse 11" cx="68.5" cy="68.5" r="68.5" transform="translate(183 123)" fill="#fdc830" opacity="0.5" style="mix-blend-mode: overlay;isolation: isolate"/>
+    <circle id="Ellipse_12" data-name="Ellipse 12" cx="41.5" cy="41.5" r="41.5" transform="translate(24 187)" fill="#fdc830" opacity="0.5" style="mix-blend-mode: overlay;isolation: isolate"/>
+    <circle id="Ellipse_13" data-name="Ellipse 13" cx="20.5" cy="20.5" r="20.5" transform="translate(279 210)" fill="#fdc830" opacity="0.5" style="mix-blend-mode: overlay;isolation: isolate"/>
+  </g>
+  <text id="NASA" transform="translate(87 68)" fill="#fafafa" font-size="50" font-family="Helvetica"><tspan x="0" y="0">NASA</tspan></text>
+</svg>
