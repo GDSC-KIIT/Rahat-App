@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/components/wavePainter.dart';
+import 'package:rahat/services/authService.dart';
 import 'package:rahat/views/homeScreen.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -34,17 +35,23 @@ class _SignInScreenState extends State<SignInScreen> {
     });
 
     if (checkFields()) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) {
-        return HomeScreen();
-      }), (Route<dynamic> route) => false);
-    } else {
-      setState(() {
-        _loggingIn = false;
-      });
-      scaffkey.currentState.showSnackBar(new SnackBar(
-        content: new Text("Authentication failure !! Please retry."),
-      ));
+      bool authenticated = await AuthService.authenticate(_email, _password);
+
+      if (authenticated) {
+        var user = await AuthService.getSavedAuth();
+        print(user['token']);
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (BuildContext context) {
+          return HomeScreen();
+        }), (Route<dynamic> route) => false);
+      } else {
+        setState(() {
+          _loggingIn = false;
+        });
+        scaffkey.currentState.showSnackBar(new SnackBar(
+          content: new Text("Authentication failure !! Please retry."),
+        ));
+      }
     }
   }
 
