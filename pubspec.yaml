@@ -31,6 +31,7 @@ dependencies:
   http: ^0.12.2
   shared_preferences: ^0.5.10
   flutter_svg: ^0.19.0
+  geolocator: ^5.3.1
 
 dev_dependencies:
   flutter_test:
@@ -50,9 +51,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
-    - assets/images/weatherWidget.svg
     - assets/images/sos.svg
     - assets/images/nasaWidget.svg 
+    - assets/images/cloud.svg 
+    - assets/images/darkBG.svg
+    - assets/images/mascot.png  
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

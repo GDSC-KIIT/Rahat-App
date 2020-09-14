@@ -6,6 +6,8 @@ import 'package:rahat/services/authService.dart';
 import 'package:rahat/services/userService.dart';
 import 'package:rahat/views/profile/profileScreen.dart';
 import 'package:rahat/views/signinScreen.dart';
+import 'package:rahat/weather/weather.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,6 +17,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   User user;
   bool _isLoading = false;
+  //Weather Fetching
+  WeatherModel weather = WeatherModel();
+  int temperature;
+  String condition;
+  int humidity;
+  double windSpeed;
 
   @override
   void initState() {
@@ -27,10 +35,35 @@ class _HomeScreenState extends State<HomeScreen> {
       _isLoading = true;
     });
     user = await UserService.getUser();
+    var weatherData = await weather.getLocationWeather();
+    updateUI(weatherData);
     setState(() {
       _isLoading = false;
     });
   }
+
+  void updateUI(dynamic weatherData) async {
+    //SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        condition = '';
+        humidity = 0;
+        windSpeed = 0.0;
+      }
+      temperature = weatherData['main']['temp'];
+      condition = weatherData['weather'][0]['main'];
+      humidity = weatherData['main']['humidity'];
+      windSpeed = weatherData['wind']['speed'];
+    });
+    // prefs.setInt("temperature", temperature);
+    // prefs.setString("condition", condition);
+    // prefs.setInt("humidity", humidity);
+    // prefs.setDouble("windSpeed", windSpeed);
+    // print("SAVED");
+  }
+
+  
 
   signOut() async {
     await AuthService.clearAuth();
@@ -62,8 +95,99 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 height: UIConstants.fitToHeight(150, context),
                 width: UIConstants.fitToWidth(300, context),
-                child: SvgPicture.asset('assets/images/weatherWidget.svg',
-                    fit: BoxFit.contain),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  gradient: LinearGradient(
+                    colors: <Color>[Color(0xffFDC830), Color(0xffF37335)],
+                  ),
+                ),
+                child: Stack(children: [
+                  Positioned(
+                      child: temperature != null
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 31.0, left: 21, right: 1.0),
+                              child: Text(
+                                '$temperature°C',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 31.0, left: 21, right: 1.0),
+                              child: Text(
+                                '0°C',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            )),
+                  Positioned(
+                      child: condition != null
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 95.0, left: 21),
+                              child: Text(
+                                '$condition',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            )
+                          : Container()),
+                  Positioned(
+                    child: temperature !=null
+                    ? Padding(
+                      padding: const EdgeInsets.only(left: 17, top: 125),
+                      child: Container(
+                        height: UIConstants.fitToHeight(1, context),
+                        width: UIConstants.fitToWidth(100.82, context),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(1.0)),
+                      ),
+                    ): Container(),
+                  ),
+                  Positioned(
+                      child: humidity != null
+                          ? Padding(
+                            padding: const EdgeInsets.only(left: 21, top: 135),
+                            child: Text(
+                                'Humidity $humidity%',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                          )
+                          : Container()),
+                  Positioned(
+                      child: windSpeed != null
+                          ? Padding(
+                            padding: const EdgeInsets.only(left: 21.0, top: 155),
+                            child: Text(
+                                'Wind ${windSpeed}mph',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                          )
+                          : Container()),
+                  Positioned(
+                      top: UIConstants.fitToHeight(30, context),
+                      left: UIConstants.fitToWidth(170, context),
+                      child: SvgPicture.asset('assets/images/darkBG.svg')),
+                  Positioned(
+                      top: UIConstants.fitToHeight(43, context),
+                      left: UIConstants.fitToWidth(155, context),
+                      child: SvgPicture.asset('assets/images/cloud.svg')),
+                ]),
               ),
             ),
             Padding(
