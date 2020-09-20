@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/common/ui_constants.dart';
-import 'package:rahat/components/wavePainter.dart';
 import 'package:rahat/services/authService.dart';
 import 'package:rahat/views/homeScreen.dart';
 

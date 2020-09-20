@@ -4,10 +4,10 @@ import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/models/User.dart';
 import 'package:rahat/services/authService.dart';
 import 'package:rahat/services/userService.dart';
+import 'package:rahat/views/news/newsScreen.dart';
 import 'package:rahat/views/profile/profileScreen.dart';
 import 'package:rahat/views/signinScreen.dart';
 import 'package:rahat/weather/weather.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -63,8 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // print("SAVED");
   }
 
-  
-
   signOut() async {
     await AuthService.clearAuth();
 
@@ -119,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: const EdgeInsets.only(
                                   top: 31.0, left: 21, right: 1.0),
                               child: Text(
-                                '0°C',
+                                '',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 50,
@@ -141,43 +139,46 @@ class _HomeScreenState extends State<HomeScreen> {
                             )
                           : Container()),
                   Positioned(
-                    child: temperature !=null
-                    ? Padding(
-                      padding: const EdgeInsets.only(left: 17, top: 125),
-                      child: Container(
-                        height: UIConstants.fitToHeight(1, context),
-                        width: UIConstants.fitToWidth(100.82, context),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(1.0)),
-                      ),
-                    ): Container(),
+                    child: temperature != null
+                        ? Padding(
+                            padding: const EdgeInsets.only(left: 17, top: 125),
+                            child: Container(
+                              height: UIConstants.fitToHeight(1, context),
+                              width: UIConstants.fitToWidth(100.82, context),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(1.0)),
+                            ),
+                          )
+                        : Container(),
                   ),
                   Positioned(
                       child: humidity != null
                           ? Padding(
-                            padding: const EdgeInsets.only(left: 21, top: 135),
-                            child: Text(
+                              padding:
+                                  const EdgeInsets.only(left: 21, top: 135),
+                              child: Text(
                                 'Humidity $humidity%',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500),
                               ),
-                          )
+                            )
                           : Container()),
                   Positioned(
                       child: windSpeed != null
                           ? Padding(
-                            padding: const EdgeInsets.only(left: 21.0, top: 155),
-                            child: Text(
+                              padding:
+                                  const EdgeInsets.only(left: 21.0, top: 155),
+                              child: Text(
                                 'Wind ${windSpeed}mph',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w500),
                               ),
-                          )
+                            )
                           : Container()),
                   Positioned(
                       top: UIConstants.fitToHeight(30, context),
@@ -223,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         )),
       ),
-      drawer: !_isLoading ? Drawer(child: drawerItems(context)) : Drawer(),
+      drawer: !_isLoading ? Drawer(child: drawerItems(context)) : null,
     );
   }
 
@@ -273,7 +274,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(color: Color(0xffF47216), fontSize: 15),
               ),
               trailing: Icon(Icons.assessment, color: Colors.white),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return NewsScreen();
+                }));
+              },
             ),
             Divider(
               color: Color(0xff707070),
