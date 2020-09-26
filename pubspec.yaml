@@ -32,4 +32,8 @@ flutter:
     - assets/images/cloud.svg 
     - assets/images/darkBG.svg
     - assets/images/mascot.png  
+    - assets/images/landslide.png  
+    - assets/images/flood.png  
+    - assets/images/earthquake.png  
+    - assets/images/tsunami.png  
 

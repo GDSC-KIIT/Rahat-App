@@ -27,7 +27,7 @@ class NewsCard extends StatelessWidget {
             ),
             subtitle: Text(
               '${news.title}',
-              textAlign: TextAlign.justify,
+              textAlign: TextAlign.left,
               style: TextStyle(color: Colors.white),
             ),
           ),

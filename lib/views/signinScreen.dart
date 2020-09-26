@@ -127,7 +127,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                     height:
                                         UIConstants.fitToHeight(43, context),
                                     width: UIConstants.fitToWidth(142, context),
-                                    decoration: const BoxDecoration(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
                                       gradient: LinearGradient(
                                         colors: <Color>[
                                           Color(0xffFDC830),

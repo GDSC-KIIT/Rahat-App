@@ -5,7 +5,7 @@ import 'package:rahat/services/baseService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService extends BaseService {
-  static const BASE_URI = "http://192.168.1.5:1000/api/";
+  static const BASE_URI = "http://192.168.43.151:1000/api/";
   static Map<String, dynamic> _authDetails;
   static const String authNamespace = "auth";
 

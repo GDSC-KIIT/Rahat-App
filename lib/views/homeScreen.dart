@@ -4,9 +4,11 @@ import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/models/User.dart';
 import 'package:rahat/services/authService.dart';
 import 'package:rahat/services/userService.dart';
+import 'package:rahat/views/nasa/nasaPage.dart';
 import 'package:rahat/views/news/newsScreen.dart';
 import 'package:rahat/views/profile/profileScreen.dart';
 import 'package:rahat/views/signinScreen.dart';
+import 'package:rahat/views/sos/sosPage.dart';
 import 'package:rahat/weather/weather.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false;
   //Weather Fetching
   WeatherModel weather = WeatherModel();
-  int temperature;
+  var temperature;
   String condition;
   int humidity;
-  double windSpeed;
+  var windSpeed;
 
   @override
   void initState() {
@@ -49,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
         temperature = 0;
         condition = '';
         humidity = 0;
-        windSpeed = 0.0;
+        windSpeed = 0;
       }
       temperature = weatherData['main']['temp'];
       condition = weatherData['weather'][0]['main'];
@@ -106,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: const EdgeInsets.only(
                                   top: 31.0, left: 21, right: 1.0),
                               child: Text(
-                                '$temperature°C',
+                                '${temperature.toInt()}°C',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 50,
@@ -198,6 +200,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 right: UIConstants.fitToWidth(30, context),
               ),
               child: InkWell(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return NasaPage();
+                  }));
+                },
                 child: Container(
                   height: UIConstants.fitToHeight(100, context),
                   width: UIConstants.fitToWidth(300, context),
@@ -213,6 +221,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   right: UIConstants.fitToWidth(137.5, context),
                   bottom: UIConstants.fitToHeight(50, context)),
               child: InkWell(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return SosPage();
+                  }));
+                },
                 child: Container(
                   height: UIConstants.fitToHeight(85, context),
                   width: UIConstants.fitToWidth(85, context),
