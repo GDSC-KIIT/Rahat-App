@@ -39,8 +39,8 @@ class _NewsScreenState extends State<NewsScreen> {
         body: isLoading
             ? Center(
                 child: CircularProgressIndicator(
-                backgroundColor: Color(0xffF47216),
-              ))
+                    valueColor:
+                        new AlwaysStoppedAnimation<Color>(Color(0xffF37335))))
             : Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ListView.builder(

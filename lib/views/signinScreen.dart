@@ -118,7 +118,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               ? RaisedButton(
                                   onPressed: login,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(15.0),
                                   ),
                                   textColor: Colors.white,
                                   padding: const EdgeInsets.all(0.0),
@@ -143,7 +143,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                   ),
                                 )
                               : Center(
-                                  child: CircularProgressIndicator(),
+                                  child: CircularProgressIndicator(
+                                      valueColor:
+                                          new AlwaysStoppedAnimation<Color>(
+                                              Color(0xffF37335))),
                                 ),
                           SizedBox(
                               height: UIConstants.fitToHeight(10, context)),
