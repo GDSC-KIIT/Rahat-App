@@ -17,14 +17,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  User user;
-  bool _isLoading = false;
-  //Weather Fetching
-  WeatherModel weather = WeatherModel();
-  var temperature;
   String condition;
   int humidity;
+  var temperature;
+  User user;
+  //Weather Fetching
+  WeatherModel weather = WeatherModel();
+
   var windSpeed;
+
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -72,6 +74,81 @@ class _HomeScreenState extends State<HomeScreen> {
         new MaterialPageRoute(builder: (context) {
       return SignInScreen();
     }), (Route<dynamic> route) => false);
+  }
+
+  Widget drawerItems(context) {
+    return Container(
+        color: Colors.black,
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Color(0xffF47216),
+              ),
+              accountName: Text('${user.name} ${user.lastName}'),
+              accountEmail: Text('${user.email}'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.black,
+                child: Text(
+                  "${user.name}".substring(0, 1),
+                  style: TextStyle(fontSize: 40.0, color: Colors.white),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text(
+                "Profile",
+                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
+              ),
+              trailing: Icon(Icons.person, color: Colors.white),
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return ProfileScreen(user: user);
+                }));
+              },
+            ),
+            ListTile(
+              title: Text(
+                "Nasa",
+                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
+              ),
+              trailing: Icon(Icons.explore, color: Colors.white),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                  return NasaPage();
+                }));
+              },
+            ),
+            ListTile(
+              title: Text(
+                "News",
+                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
+              ),
+              trailing: Icon(Icons.assessment, color: Colors.white),
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return NewsScreen();
+                }));
+              },
+            ),
+            Divider(
+              color: Color(0xff707070),
+              thickness: 1.0,
+            ),
+            ListTile(
+              title: Text(
+                "Sign Out",
+                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
+              ),
+              trailing: Icon(Icons.exit_to_app, color: Colors.white),
+              onTap: () {
+                signOut();
+              },
+            ),
+          ],
+        ));
   }
 
   @override
@@ -240,76 +317,5 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       drawer: !_isLoading ? Drawer(child: drawerItems(context)) : null,
     );
-  }
-
-  Widget drawerItems(context) {
-    return Container(
-        color: Colors.black,
-        child: ListView(
-          children: [
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xffF47216),
-              ),
-              accountName: Text('${user.name} ${user.lastName}'),
-              accountEmail: Text('${user.email}'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.black,
-                child: Text(
-                  "${user.name}".substring(0, 1),
-                  style: TextStyle(fontSize: 40.0, color: Colors.white),
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text(
-                "Profile",
-                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
-              ),
-              trailing: Icon(Icons.person, color: Colors.white),
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                  return ProfileScreen(user: user);
-                }));
-              },
-            ),
-            ListTile(
-              title: Text(
-                "Nasa",
-                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
-              ),
-              trailing: Icon(Icons.explore, color: Colors.white),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                "News",
-                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
-              ),
-              trailing: Icon(Icons.assessment, color: Colors.white),
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                  return NewsScreen();
-                }));
-              },
-            ),
-            Divider(
-              color: Color(0xff707070),
-              thickness: 1.0,
-            ),
-            ListTile(
-              title: Text(
-                "Sign Out",
-                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
-              ),
-              trailing: Icon(Icons.exit_to_app, color: Colors.white),
-              onTap: () {
-                signOut();
-              },
-            ),
-          ],
-        ));
   }
 }
