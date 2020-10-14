@@ -92,6 +92,11 @@ class AuthService extends BaseService {
         authNamespace, json.encode({"token": token, "email": email, "id": id}));
   }
 
+  static Future<String> getUserId() async {
+    Map<String, dynamic> credentials = await AuthService.getSavedAuth();
+    return credentials['id'];
+  }
+
   static clearAuth() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();

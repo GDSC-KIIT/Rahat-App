@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/models/News.dart';
 
 class NewsCard extends StatelessWidget {

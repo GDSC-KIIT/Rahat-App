@@ -5,13 +5,8 @@ import 'package:rahat/models/User.dart';
 import 'package:rahat/services/authService.dart';
 
 class UserService extends AuthService {
-  static Future<String> getUserId() async {
-    Map<String, dynamic> credentials = await AuthService.getSavedAuth();
-    return credentials['id'];
-  }
-
   static Future<User> getUser() async {
-    String id = await getUserId();
+    String id = await AuthService.getUserId();
     http.Response response = await AuthService.makeAuthenticatedRequest(
         AuthService.BASE_URI + 'user/$id',
         method: 'GET');
