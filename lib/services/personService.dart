@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:rahat/models/Person.dart';
 import 'package:rahat/services/authService.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PersonService extends AuthService {
   static Future<Person> createPerson(var payload) async {
@@ -37,7 +38,8 @@ class PersonService extends AuthService {
   }
 
   static Future<Person> updatePerson(String personId, var payload) async {
-    String id = await AuthService.getUserId();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String id = prefs.getString('id');
     http.Response response = await AuthService.makeAuthenticatedRequest(
         AuthService.BASE_URI + 'update/person/$personId/$id',
         method: 'PUT',
@@ -53,7 +55,8 @@ class PersonService extends AuthService {
   }
 
   static deletePerson(String personId) async {
-    String id = await AuthService.getUserId();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String id = prefs.getString('id');
     http.Response response = await AuthService.makeAuthenticatedRequest(
         AuthService.BASE_URI + 'delete/person/$personId/$id',
         method: 'DELETE');

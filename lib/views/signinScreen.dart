@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/services/authService.dart';
 import 'package:rahat/views/homeScreen.dart';
+import 'package:rahat/views/signupScreen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -101,8 +102,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       key: formkey,
                       child: Column(
                         children: [
-                          _input("Please Enter your Username", false,
-                              "Username", 'Username', (value) {
+                          _input("Please Enter your Email", false,
+                              "Email", 'Email', (value) {
                             _email = value;
                           }),
                           SizedBox(
@@ -151,7 +152,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           SizedBox(
                               height: UIConstants.fitToHeight(10, context)),
                           GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                  return SignUpScreen();
+                                }));
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -159,15 +166,15 @@ class _SignInScreenState extends State<SignInScreen> {
                                   Text(
                                     'New User? ',
                                     style: TextStyle(
-                                        fontSize: 10, color: Color(0xff707070)),
+                                        fontSize: 12, color: Color(0xff707070)),
                                   ),
                                   Text(
                                     'Sign Up',
                                     style: TextStyle(
-                                        fontSize: 10, color: Color(0xffF47A25)),
+                                        fontSize: 12, color: Color(0xffF47A25)),
                                   ),
                                 ],
-                              )),
+                              ))
                         ],
                       )),
                 ),

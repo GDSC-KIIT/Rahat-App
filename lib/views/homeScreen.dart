@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int humidity;
   var temperature;
   User user;
-  //Weather Fetching
   WeatherModel weather = WeatherModel();
 
   var windSpeed;
@@ -47,7 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void updateUI(dynamic weatherData) async {
-    //SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       if (weatherData == null) {
         temperature = 0;
@@ -60,11 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
       humidity = weatherData['main']['humidity'];
       windSpeed = weatherData['wind']['speed'];
     });
-    // prefs.setInt("temperature", temperature);
-    // prefs.setString("condition", condition);
-    // prefs.setInt("humidity", humidity);
-    // prefs.setDouble("windSpeed", windSpeed);
-    // print("SAVED");
   }
 
   signOut() async {

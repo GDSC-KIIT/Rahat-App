@@ -9,6 +9,7 @@ class AuthService extends BaseService {
   static Map<String, dynamic> _authDetails;
   static const String authNamespace = "auth";
 
+  // ignore: missing_return
   static Future<http.Response> makeAuthenticatedRequest(String url,
       {String method = 'POST',
       body,
@@ -76,9 +77,7 @@ class AuthService extends BaseService {
     print(responseMap);
 
     String token = responseMap['token'];
-    String id = responseMap['user']['_id'].toString();
-    print(token);
-    print(id);
+    String id = responseMap['user']['id'].toString();
 
     bool success = token != null;
 
@@ -92,10 +91,27 @@ class AuthService extends BaseService {
         authNamespace, json.encode({"token": token, "email": email, "id": id}));
   }
 
-  static Future<String> getUserId() async {
-    Map<String, dynamic> credentials = await AuthService.getSavedAuth();
-    return credentials['id'];
+  static Future<bool> signUp(var payload) async {
+    http.Response response = await BaseService.makeUnauthenticatedRequest(
+        BaseService.BASE_URI + 'signup',
+        body: payload);
+
+    Map<String, dynamic> responseMap = json.decode(response.body);
+    print(responseMap);
+
+    String token = responseMap['token'];
+    String id = responseMap['user']['id'].toString();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('id', id);
+    String email = responseMap['user']['email'].toString();
+    print(token);
+
+    bool success = token != null;
+
+    if (success) _saveToken(token, email, id);
+    return success;
   }
+
 
   static clearAuth() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
