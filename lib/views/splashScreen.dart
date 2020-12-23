@@ -31,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
         return HomeScreen();
       }));
     } else {
-      print("Going to login screen");
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (context) {
         return SignInScreen();

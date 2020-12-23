@@ -5,7 +5,7 @@ import 'package:rahat/services/baseService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService extends BaseService {
-  static const BASE_URI = "http://192.168.1.5:1000/api/";
+  static const BASE_URI = "http://174.138.122.160/api/";
   static Map<String, dynamic> _authDetails;
   static const String authNamespace = "auth";
 
@@ -85,31 +85,27 @@ class AuthService extends BaseService {
     return success;
   }
 
-  static _saveToken(String token, String email, String id) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
-        authNamespace, json.encode({"token": token, "email": email, "id": id}));
-  }
-
   static Future<bool> signUp(var payload) async {
     http.Response response = await BaseService.makeUnauthenticatedRequest(
         BaseService.BASE_URI + 'signup',
         body: payload);
 
     Map<String, dynamic> responseMap = json.decode(response.body);
-    print(responseMap);
 
     String token = responseMap['token'];
     String id = responseMap['user']['id'].toString();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('id', id);
     String email = responseMap['user']['email'].toString();
-    print(token);
 
     bool success = token != null;
 
     if (success) _saveToken(token, email, id);
     return success;
+  }
+
+  static _saveToken(String token, String email, String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        authNamespace, json.encode({"token": token, "email": email, "id": id}));
   }
 
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rahat/components/newsCard.dart';
 import 'package:rahat/models/News.dart';
 import 'package:rahat/services/newsService.dart';
-import 'package:rahat/views/news/newsDetails.dart';
+import 'package:rahat/views/news/newsDetailsScreen.dart';
 
 class NewsScreen extends StatefulWidget {
   @override
@@ -23,7 +23,11 @@ class _NewsScreenState extends State<NewsScreen> {
     setState(() {
       isLoading = true;
     });
-    news = await NewsService.getNews();
+    try {
+      news = await NewsService.getNews();
+    } catch (e) {
+      print(e);
+    }
     setState(() {
       isLoading = false;
     });
@@ -35,7 +39,7 @@ class _NewsScreenState extends State<NewsScreen> {
         appBar: AppBar(
             title: Text('NEWS'),
             centerTitle: true,
-            backgroundColor: Colors.transparent),
+            backgroundColor: Colors.black),
         body: isLoading
             ? Center(
                 child: CircularProgressIndicator(
@@ -47,20 +51,7 @@ class _NewsScreenState extends State<NewsScreen> {
                     itemCount: news.length,
                     itemBuilder: (BuildContext context, index) {
                       var newsItem = news[index];
-                      return Ink(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: InkWell(
-                            //splashColor: Color(0xffF47216),
-                            splashColor: Colors.white,
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return NewsDetails(news: newsItem);
-                              }));
-                            },
-                            child: NewsCard(news: newsItem)),
-                      );
+                      return NewsCard(news: newsItem);
                     }),
               ));
   }

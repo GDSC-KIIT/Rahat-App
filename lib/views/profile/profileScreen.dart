@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/models/User.dart';
+import 'package:rahat/views/profile/addPersonScreen.dart';
 import 'package:rahat/views/profile/editPersonScreen.dart';
 import 'package:rahat/views/profile/personScreen.dart';
 
@@ -48,12 +50,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: UIConstants.fitToWidth(60, context),
                       child: Image.asset('assets/images/mascot.png')),
                 ),
-                Container(
-                  height: UIConstants.fitToHeight(40, context),
-                ),
-                listWidget('Name', user.name + ' '+ user.lastName),
+                SizedBox(height: UIConstants.fitToHeight(40, context)),
+                listWidget('Name', user.name + ' ' + user.lastName),
                 listWidget('Phone Number', user.phone),
                 listWidget('Email', user.email),
+                personCard(context, 'Persons Added', onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return PersonScreen(user: user);
+                  }));
+                }),
+                SizedBox(height: UIConstants.fitToHeight(32, context)),
                 editButton(context)
               ],
             )),
@@ -64,9 +71,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget listWidget(String title, String subTitle) {
     return Padding(
       padding: EdgeInsets.only(
-          left: UIConstants.fitToWidth(25, context),
-          right: UIConstants.fitToWidth(25, context),
-          bottom: UIConstants.fitToHeight(25, context)),
+          left: UIConstants.fitToWidth(24, context),
+          right: UIConstants.fitToWidth(24, context),
+          bottom: UIConstants.fitToHeight(24, context)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,6 +92,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
           )
         ],
+      ),
+    );
+  }
+
+  Widget personCard(context, String title, {VoidCallback onTap}) {
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        height: UIConstants.fitToHeight(35, context),
+        width: UIConstants.fitToWidth(312, context),
+        child: Ink(
+          decoration: BoxDecoration(
+              color: Color(0xff323232),
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(2, -2),
+                  blurRadius: 2,
+                  color: Colors.white.withOpacity(0.15),
+                ),
+                BoxShadow(
+                  offset: Offset(-2, 2),
+                  blurRadius: 1,
+                  color: Colors.white.withOpacity(0.15),
+                ),
+              ]),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(4),
+            splashColor: Color(0xff323232),
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('$title',
+                      style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500))),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

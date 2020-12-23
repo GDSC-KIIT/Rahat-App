@@ -7,10 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService extends AuthService {
   static Future<User> getUser() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String id = prefs.getString('id');
+    var auth = await AuthService.getSavedAuth();
     http.Response response = await AuthService.makeAuthenticatedRequest(
-        AuthService.BASE_URI + 'user/$id',
+        AuthService.BASE_URI + 'user/${auth['id']}',
         method: 'GET');
     if (response.statusCode == 200) {
       var responseMap = json.decode(response.body);
@@ -22,15 +21,12 @@ class UserService extends AuthService {
   }
 
   static Future<User> updateUser(var payload) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String id = prefs.getString('id');
+    var auth = await AuthService.getSavedAuth();
     http.Response response = await AuthService.makeAuthenticatedRequest(
-      AuthService.BASE_URI + 'user/$id',
-      method: 'PUT'
-    );
-    if(response.statusCode == 200) {
+        AuthService.BASE_URI + 'user/${auth['id']}',
+        method: 'PUT');
+    if (response.statusCode == 200) {
       var responseMap = json.decode(response.body);
-
     }
   }
 }

@@ -37,9 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _isLoading = true;
     });
-    user = await UserService.getUser();
-    var weatherData = await weather.getLocationWeather();
-    updateUI(weatherData);
+    try {
+      user = await UserService.getUser();
+      
+      var weatherData = await weather.getLocationWeather();
+      updateUI(weatherData);
+    } catch (e) {
+      print(e);
+    }
+    
     setState(() {
       _isLoading = false;
     });
@@ -108,7 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               trailing: Icon(Icons.explore, color: Colors.white),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
                   return NasaPage();
                 }));
               },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/common/ui_constants.dart';
+import 'package:rahat/components/wavePainter.dart';
 import 'package:rahat/services/authService.dart';
 import 'package:rahat/views/homeScreen.dart';
 import 'package:rahat/views/signupScreen.dart';
@@ -35,22 +36,35 @@ class _SignInScreenState extends State<SignInScreen> {
     });
 
     if (checkFields()) {
-      bool authenticated = await AuthService.authenticate(_email, _password);
-
-      if (authenticated) {
-        var user = await AuthService.getSavedAuth();
-        print(user['token']);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (BuildContext context) {
-          return HomeScreen();
-        }), (Route<dynamic> route) => false);
-      } else {
-        setState(() {
-          _loggingIn = false;
-        });
+      try {
+        bool authenticated = await AuthService.authenticate(_email, _password);
+        try {
+          if (authenticated) {
+            var user = await AuthService.getSavedAuth();
+            print(user['token']);
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (BuildContext context) {
+              return HomeScreen();
+            }), (Route<dynamic> route) => false);
+          } else {
+            setState(() {
+              _loggingIn = false;
+            });
+            scaffkey.currentState.showSnackBar(new SnackBar(
+              content: new Text("Authentication failure !! Please retry."),
+            ));
+          }
+        } catch (e) {
+          scaffkey.currentState.showSnackBar(new SnackBar(
+            content: new Text("Authentication failure !! Please retry."),
+          ));
+          print(e);
+        }
+      } catch (e) {
         scaffkey.currentState.showSnackBar(new SnackBar(
           content: new Text("Authentication failure !! Please retry."),
         ));
+        print(e);
       }
     }
   }
@@ -78,114 +92,122 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
       key: scaffkey,
       body: SingleChildScrollView(
-        child: Container(
-          height: UIConstants.fitToHeight(640, context),
-          width: UIConstants.fitToHeight(360, context),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: UIConstants.fitToHeight(60, context)),
-              Image.asset(
-                UIConstants.logo,
-                height: UIConstants.fitToHeight(65, context),
-                width: UIConstants.fitToWidth(130, context),
-                fit: BoxFit.cover,
-              ),
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: UIConstants.fitToHeight(130, context),
-                      left: UIConstants.fitToWidth(42.5, context),
-                      right: UIConstants.fitToWidth(42.5, context)),
-                  child: Form(
-                      key: formkey,
-                      child: Column(
-                        children: [
-                          _input("Please Enter your Email", false,
-                              "Email", 'Email', (value) {
-                            _email = value;
-                          }),
-                          SizedBox(
-                            height: UIConstants.fitToHeight(20, context),
-                          ),
-                          _input("Please Enter your Password", true, "Password",
-                              'Password', (value) {
-                            _password = value;
-                          }),
-                          SizedBox(
-                              height: UIConstants.fitToHeight(78, context)),
-                          (!_loggingIn)
-                              ? RaisedButton(
-                                  onPressed: login,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  textColor: Colors.white,
-                                  padding: const EdgeInsets.all(0.0),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height:
-                                        UIConstants.fitToHeight(43, context),
-                                    width: UIConstants.fitToWidth(142, context),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      gradient: LinearGradient(
-                                        colors: <Color>[
-                                          Color(0xffFDC830),
-                                          Color(0xffF37335)
-                                        ],
-                                      ),
-                                    ),
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: const Text('Login',
-                                        style: TextStyle(
-                                            fontSize: 15, letterSpacing: 0.5)),
-                                  ),
-                                )
-                              : Center(
-                                  child: CircularProgressIndicator(
-                                      valueColor:
-                                          new AlwaysStoppedAnimation<Color>(
-                                              Color(0xffF37335))),
-                                ),
-                          SizedBox(
-                              height: UIConstants.fitToHeight(10, context)),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) {
-                                  return SignUpScreen();
-                                }));
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'New User? ',
-                                    style: TextStyle(
-                                        fontSize: 12, color: Color(0xff707070)),
-                                  ),
-                                  Text(
-                                    'Sign Up',
-                                    style: TextStyle(
-                                        fontSize: 12, color: Color(0xffF47A25)),
-                                  ),
-                                ],
-                              ))
-                        ],
-                      )),
+        child: CustomPaint(
+          painter: CurvePainter(),
+          child: Container(
+            height: UIConstants.fitToHeight(640, context),
+            width: UIConstants.fitToHeight(360, context),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: UIConstants.fitToHeight(60, context)),
+                Image.asset(
+                  UIConstants.logo,
+                  height: UIConstants.fitToHeight(65, context),
+                  width: UIConstants.fitToWidth(130, context),
+                  fit: BoxFit.cover,
                 ),
-              ),
-              // SizedBox(
-              //   height: UIConstants.fitToHeight(80, context),
-              // ),
-              // Container(
-              //   alignment: Alignment.bottomCenter,
-              //   child: WavePainter())
-            ],
+                Container(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: UIConstants.fitToHeight(130, context),
+                        left: UIConstants.fitToWidth(42.5, context),
+                        right: UIConstants.fitToWidth(42.5, context)),
+                    child: Form(
+                        key: formkey,
+                        child: Column(
+                          children: [
+                            _input("Please Enter your Email", false, "Email",
+                                'Email', (value) {
+                              _email = value;
+                            }),
+                            SizedBox(
+                              height: UIConstants.fitToHeight(20, context),
+                            ),
+                            _input("Please Enter your Password", true,
+                                "Password", 'Password', (value) {
+                              _password = value;
+                            }),
+                            SizedBox(
+                                height: UIConstants.fitToHeight(78, context)),
+                            (!_loggingIn)
+                                ? RaisedButton(
+                                    onPressed: login,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    textColor: Colors.white,
+                                    padding: const EdgeInsets.all(0.0),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      height:
+                                          UIConstants.fitToHeight(43, context),
+                                      width:
+                                          UIConstants.fitToWidth(142, context),
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        gradient: LinearGradient(
+                                          colors: <Color>[
+                                            Color(0xffFDC830),
+                                            Color(0xffF37335)
+                                          ],
+                                        ),
+                                      ),
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: const Text('Login',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              letterSpacing: 0.5)),
+                                    ),
+                                  )
+                                : Center(
+                                    child: CircularProgressIndicator(
+                                        valueColor:
+                                            new AlwaysStoppedAnimation<Color>(
+                                                Color(0xffF37335))),
+                                  ),
+                            SizedBox(
+                                height: UIConstants.fitToHeight(10, context)),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) {
+                                    return SignUpScreen();
+                                  }));
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'New User? ',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xff707070)),
+                                    ),
+                                    Text(
+                                      'Sign Up',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xffF47A25)),
+                                    ),
+                                  ],
+                                ))
+                          ],
+                        )),
+                  ),
+                ),
+                // SizedBox(
+                //   height: UIConstants.fitToHeight(80, context),
+                // ),
+                // Container(
+                //   alignment: Alignment.bottomCenter,
+                //   child: WavePainter())
+              ],
+            ),
           ),
         ),
       ),
