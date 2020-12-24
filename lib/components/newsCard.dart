@@ -12,7 +12,7 @@ class NewsCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 8, 8, 12),
       child: Container(
-        height: UIConstants.fitToHeight(180, context),
+        //height: UIConstants.fitToHeight(180, context),
         width: UIConstants.fitToWidth(340, context),
         child: Ink(
           decoration: BoxDecoration(
@@ -78,15 +78,18 @@ class NewsCard extends StatelessWidget {
                       topRight: Radius.circular(0.0),
                     ),
                   ),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text('${news.title}',
-                        textAlign: TextAlign.justify,
-                        style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text('${news.title}',
+                          textAlign: TextAlign.justify,
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12))),
+                    ),
                   ),
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/common/ui_constants.dart';
+import 'package:rahat/views/sos/selectPersonScreen.dart';
 
 class SosPage extends StatefulWidget {
   @override
@@ -7,6 +8,12 @@ class SosPage extends StatefulWidget {
 }
 
 class _SosPageState extends State<SosPage> {
+  void navigateToSelectPerson() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return SelectPersonScreen();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,10 +56,18 @@ class _SosPageState extends State<SosPage> {
       crossAxisSpacing: 50,
       crossAxisCount: 2,
       children: [
-        menuBlock('assets/images/earthquake.png', 'Earthquake', onTap: () {}),
-        menuBlock('assets/images/tsunami.png', 'Tsunami', onTap: () {}),
-        menuBlock('assets/images/landslide.png', 'Landslide', onTap: () {}),
-        menuBlock('assets/images/flood.png', 'Flood', onTap: () {})
+        menuBlock('assets/images/earthquake.png', 'Earthquake', onTap: () {
+          navigateToSelectPerson();
+        }),
+        menuBlock('assets/images/tsunami.png', 'Tsunami', onTap: () {
+          navigateToSelectPerson();
+        }),
+        menuBlock('assets/images/landslide.png', 'Landslide', onTap: () {
+          navigateToSelectPerson();
+        }),
+        menuBlock('assets/images/flood.png', 'Flood', onTap: () {
+          navigateToSelectPerson();
+        })
       ],
     );
   }

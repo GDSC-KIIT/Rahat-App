@@ -39,7 +39,9 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('NEWS'), centerTitle: true, actions: [
+      appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text('NEWS'), centerTitle: true, actions: [
         IconButton(
             icon: Icon(Icons.open_in_browser),
             onPressed: () {
@@ -89,7 +91,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
               news.content != null
                   ? Text('${news.content}',
                       textAlign: TextAlign.justify,
-                      style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)))
+                      style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500)))
                   : Text(''),
             ]),
       ),
