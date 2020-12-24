@@ -8,9 +8,9 @@ class SosPage extends StatefulWidget {
 }
 
 class _SosPageState extends State<SosPage> {
-  void navigateToSelectPerson() {
+  void navigateToSelectPerson(String disaster) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return SelectPersonScreen();
+      return SelectPersonScreen(disaster: disaster);
     }));
   }
 
@@ -57,16 +57,16 @@ class _SosPageState extends State<SosPage> {
       crossAxisCount: 2,
       children: [
         menuBlock('assets/images/earthquake.png', 'Earthquake', onTap: () {
-          navigateToSelectPerson();
+          navigateToSelectPerson('Earthquake');
         }),
         menuBlock('assets/images/tsunami.png', 'Tsunami', onTap: () {
-          navigateToSelectPerson();
+          navigateToSelectPerson('Tsunami');
         }),
         menuBlock('assets/images/landslide.png', 'Landslide', onTap: () {
-          navigateToSelectPerson();
+          navigateToSelectPerson('Landslide');
         }),
         menuBlock('assets/images/flood.png', 'Flood', onTap: () {
-          navigateToSelectPerson();
+          navigateToSelectPerson('Flood');
         })
       ],
     );

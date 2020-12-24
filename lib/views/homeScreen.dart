@@ -39,13 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     try {
       user = await UserService.getUser();
-      
+
       var weatherData = await weather.getLocationWeather();
       updateUI(weatherData);
     } catch (e) {
       print(e);
     }
-    
+
     setState(() {
       _isLoading = false;
     });
@@ -158,163 +158,173 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.black,
         iconTheme: new IconThemeData(color: Color(0xffF47216)),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  top: UIConstants.fitToHeight(20, context),
-                  left: UIConstants.fitToWidth(30, context),
-                  right: UIConstants.fitToWidth(30, context)),
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(
+                  valueColor:
+                      new AlwaysStoppedAnimation<Color>(Color(0xffF37335))),
+            )
+          : SingleChildScrollView(
               child: Container(
-                height: UIConstants.fitToHeight(150, context),
-                width: UIConstants.fitToWidth(300, context),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  gradient: LinearGradient(
-                    colors: <Color>[Color(0xffFDC830), Color(0xffF37335)],
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: UIConstants.fitToHeight(20, context),
+                        left: UIConstants.fitToWidth(30, context),
+                        right: UIConstants.fitToWidth(30, context)),
+                    child: Container(
+                      height: UIConstants.fitToHeight(150, context),
+                      width: UIConstants.fitToWidth(300, context),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        gradient: LinearGradient(
+                          colors: <Color>[Color(0xffFDC830), Color(0xffF37335)],
+                        ),
+                      ),
+                      child: Stack(children: [
+                        Positioned(
+                            child: temperature != null
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 31.0, left: 21, right: 1.0),
+                                    child: Text(
+                                      '${temperature.toInt()}°C',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 31.0, left: 21, right: 1.0),
+                                    child: Text(
+                                      '',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  )),
+                        Positioned(
+                            child: condition != null
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 95.0, left: 21),
+                                    child: Text(
+                                      '$condition',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  )
+                                : Container()),
+                        Positioned(
+                          child: temperature != null
+                              ? Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 17, top: 125),
+                                  child: Container(
+                                    height: UIConstants.fitToHeight(1, context),
+                                    width:
+                                        UIConstants.fitToWidth(100.82, context),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(1.0)),
+                                  ),
+                                )
+                              : Container(),
+                        ),
+                        Positioned(
+                            child: humidity != null
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 21, top: 135),
+                                    child: Text(
+                                      'Humidity $humidity%',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  )
+                                : Container()),
+                        Positioned(
+                            child: windSpeed != null
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 21.0, top: 155),
+                                    child: Text(
+                                      'Wind ${windSpeed}mph',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  )
+                                : Container()),
+                        Positioned(
+                            top: UIConstants.fitToHeight(30, context),
+                            left: UIConstants.fitToWidth(170, context),
+                            child:
+                                SvgPicture.asset('assets/images/darkBG.svg')),
+                        Positioned(
+                            top: UIConstants.fitToHeight(43, context),
+                            left: UIConstants.fitToWidth(155, context),
+                            child: SvgPicture.asset('assets/images/cloud.svg')),
+                      ]),
+                    ),
                   ),
-                ),
-                child: Stack(children: [
-                  Positioned(
-                      child: temperature != null
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 31.0, left: 21, right: 1.0),
-                              child: Text(
-                                '${temperature.toInt()}°C',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 50,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 31.0, left: 21, right: 1.0),
-                              child: Text(
-                                '',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 50,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )),
-                  Positioned(
-                      child: condition != null
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 95.0, left: 21),
-                              child: Text(
-                                '$condition',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )
-                          : Container()),
-                  Positioned(
-                    child: temperature != null
-                        ? Padding(
-                            padding: const EdgeInsets.only(left: 17, top: 125),
-                            child: Container(
-                              height: UIConstants.fitToHeight(1, context),
-                              width: UIConstants.fitToWidth(100.82, context),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(1.0)),
-                            ),
-                          )
-                        : Container(),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: UIConstants.fitToHeight(73, context),
+                      left: UIConstants.fitToWidth(30, context),
+                      right: UIConstants.fitToWidth(30, context),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return NasaPage();
+                        }));
+                      },
+                      child: Container(
+                        height: UIConstants.fitToHeight(100, context),
+                        width: UIConstants.fitToWidth(300, context),
+                        child: SvgPicture.asset('assets/images/nasaWidget.svg',
+                            fit: BoxFit.contain),
+                      ),
+                    ),
                   ),
-                  Positioned(
-                      child: humidity != null
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 21, top: 135),
-                              child: Text(
-                                'Humidity $humidity%',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )
-                          : Container()),
-                  Positioned(
-                      child: windSpeed != null
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 21.0, top: 155),
-                              child: Text(
-                                'Wind ${windSpeed}mph',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )
-                          : Container()),
-                  Positioned(
-                      top: UIConstants.fitToHeight(30, context),
-                      left: UIConstants.fitToWidth(170, context),
-                      child: SvgPicture.asset('assets/images/darkBG.svg')),
-                  Positioned(
-                      top: UIConstants.fitToHeight(43, context),
-                      left: UIConstants.fitToWidth(155, context),
-                      child: SvgPicture.asset('assets/images/cloud.svg')),
-                ]),
-              ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: UIConstants.fitToHeight(72, context),
+                        left: UIConstants.fitToWidth(137.5, context),
+                        right: UIConstants.fitToWidth(137.5, context),
+                        bottom: UIConstants.fitToHeight(50, context)),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return SosPage();
+                        }));
+                      },
+                      child: Container(
+                        height: UIConstants.fitToHeight(85, context),
+                        width: UIConstants.fitToWidth(85, context),
+                        child: SvgPicture.asset('assets/images/sos.svg',
+                            fit: BoxFit.contain),
+                      ),
+                    ),
+                  ),
+                ],
+              )),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: UIConstants.fitToHeight(73, context),
-                left: UIConstants.fitToWidth(30, context),
-                right: UIConstants.fitToWidth(30, context),
-              ),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return NasaPage();
-                  }));
-                },
-                child: Container(
-                  height: UIConstants.fitToHeight(100, context),
-                  width: UIConstants.fitToWidth(300, context),
-                  child: SvgPicture.asset('assets/images/nasaWidget.svg',
-                      fit: BoxFit.contain),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: UIConstants.fitToHeight(72, context),
-                  left: UIConstants.fitToWidth(137.5, context),
-                  right: UIConstants.fitToWidth(137.5, context),
-                  bottom: UIConstants.fitToHeight(50, context)),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return SosPage();
-                  }));
-                },
-                child: Container(
-                  height: UIConstants.fitToHeight(85, context),
-                  width: UIConstants.fitToWidth(85, context),
-                  child: SvgPicture.asset('assets/images/sos.svg',
-                      fit: BoxFit.contain),
-                ),
-              ),
-            ),
-          ],
-        )),
-      ),
       drawer: !_isLoading ? Drawer(child: drawerItems(context)) : null,
     );
   }
