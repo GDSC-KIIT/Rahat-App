@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/common/ui_constants.dart';
+import 'package:rahat/views/nasa/earthquake.dart';
+import 'package:rahat/views/nasa/flood.dart';
+import 'package:rahat/views/nasa/landslide.dart';
+import 'package:rahat/views/nasa/tsunami.dart';
 
 class NasaPage extends StatefulWidget {
   @override
@@ -14,10 +18,30 @@ class _NasaPageState extends State<NasaPage> {
       crossAxisSpacing: 50,
       crossAxisCount: 2,
       children: [
-        menuBlock('assets/images/earthquake.png', 'Earthquake', onTap: () {}),
-        menuBlock('assets/images/tsunami.png', 'Tsunami', onTap: () {}),
-        menuBlock('assets/images/landslide.png', 'Landslide', onTap: () {}),
-        menuBlock('assets/images/flood.png', 'Flood', onTap: () {})
+        menuBlock('assets/images/earthquake.png', 'Earthquake', onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Earthquake()),
+          );
+        }),
+        menuBlock('assets/images/tsunami.png', 'Tsunami', onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => tsunami()),
+          );
+        }),
+        menuBlock('assets/images/landslide.png', 'Landslide', onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Landslide()),
+          );
+        }),
+        menuBlock('assets/images/flood.png', 'Flood', onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => flood()),
+          );
+        })
       ],
     );
   }
@@ -73,7 +97,8 @@ class _NasaPageState extends State<NasaPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: UIConstants.fitToHeight(50, context)),
+                padding:
+                    EdgeInsets.only(top: UIConstants.fitToHeight(50, context)),
                 child: Text('SELECT',
                     textAlign: TextAlign.center,
                     style: TextStyle(
