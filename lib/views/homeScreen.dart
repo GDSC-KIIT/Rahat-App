@@ -8,6 +8,7 @@ import 'package:rahat/views/nasa/nasapage.dart';
 import 'package:rahat/views/news/newsScreen.dart';
 import 'package:rahat/views/profile/profileScreen.dart';
 import 'package:rahat/views/signinScreen.dart';
+import 'package:rahat/views/sos/emergency_contact.dart';
 import 'package:rahat/views/sos/sosPage.dart';
 import 'package:rahat/weather/weather.dart';
 
@@ -127,10 +128,29 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               trailing: Icon(Icons.assessment, color: Colors.white),
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                  return NewsScreen();
-                }));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return NewsScreen();
+                    },
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text(
+                "Emergency Contact",
+                style: TextStyle(color: Color(0xffF47216), fontSize: 15),
+              ),
+              trailing: Icon(Icons.contacts_sharp, color: Colors.white),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return EmergencyContact();
+                    },
+                  ),
+                );
               },
             ),
             Divider(
