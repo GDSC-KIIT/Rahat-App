@@ -56,6 +56,7 @@ class _PersonScreenState extends State<PersonScreen> {
           : RefreshIndicator(
               key: refreshKey,
               onRefresh: loadDataForScreen,
+              color: Color(0xffF37335),
               child: Container(
                 height: UIConstants.fitToHeight(640, context),
                 width: UIConstants.fitToWidth(360, context),
@@ -64,8 +65,10 @@ class _PersonScreenState extends State<PersonScreen> {
                         child: Text(
                           'No Persons in the list.',
                           style: GoogleFonts.montserrat(
-                              textStyle:
-                                  TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500)),
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500)),
                         ),
                       )
                     : ListView.builder(
@@ -105,12 +108,18 @@ class _PersonScreenState extends State<PersonScreen> {
                     await removePerson(person.id);
                     Navigator.of(context).pop();
                   },
-                  child: Text('Yes')),
+                  child: Text(
+                    'Yes',
+                    style: TextStyle(color: Colors.black),
+                  )),
               FlatButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('No')),
+                  child: Text(
+                    'No',
+                    style: TextStyle(color: Colors.black),
+                  )),
             ],
           );
         });
@@ -122,16 +131,19 @@ class _PersonScreenState extends State<PersonScreen> {
       if (isDeleted) {
         scaffkey.currentState.showSnackBar(new SnackBar(
           content: new Text("Pull to refresh!!!"),
+          duration: Duration(milliseconds: 1500),
         ));
       } else {
         scaffkey.currentState.showSnackBar(new SnackBar(
           content: new Text("Failed to remove this person!!!"),
+          duration: Duration(milliseconds: 1500),
         ));
       }
     } catch (e) {
       print(e);
       scaffkey.currentState.showSnackBar(new SnackBar(
         content: new Text("Please check your network. Please retry!!!"),
+        duration: Duration(milliseconds: 1500),
       ));
     }
   }

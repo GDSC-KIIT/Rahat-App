@@ -8,7 +8,7 @@ import 'package:rahat/views/nasa/nasaPage.dart';
 import 'package:rahat/views/news/newsScreen.dart';
 import 'package:rahat/views/profile/profileScreen.dart';
 import 'package:rahat/views/signinScreen.dart';
-import 'package:rahat/views/sos/emergency_contact.dart';
+import 'package:rahat/views/sos/emergencyContactScreen.dart';
 import 'package:rahat/views/sos/sosPage.dart';
 import 'package:rahat/weather/weather.dart';
 
@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return EmergencyContact();
+                      return EmergencyContactScreen();
                     },
                   ),
                 );

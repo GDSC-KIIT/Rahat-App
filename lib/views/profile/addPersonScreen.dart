@@ -22,7 +22,7 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
   String name = '';
   String age = '';
   String medicalCondition = '';
-  String dropdownValue = 'Asthma';
+  String dropdownValue = 'None';
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
       var payload = json.encode({
         "name": name,
         "age": age,
-        "medicalCondition": medicalCondition, //TODO: Only Id
+        "medicalCondition": medicalCondition,
         "userBy": "${auth['id']}"
       });
       try {
@@ -66,24 +66,28 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
         if (isCreated) {
           scaffkey.currentState.showSnackBar(new SnackBar(
             content: new Text("Person Added!!!"),
+            duration: Duration(milliseconds: 1500),
           ));
-          Timer(Duration(seconds: 3), () {
+          Timer(Duration(milliseconds: 1500), () {
             Navigator.of(context).pop();
           });
         } else {
           scaffkey.currentState.showSnackBar(new SnackBar(
             content: new Text("Adding Person failed. Please retry!!!"),
+            duration: Duration(milliseconds: 1500),
           ));
         }
       } catch (e) {
         print(e);
         scaffkey.currentState.showSnackBar(new SnackBar(
           content: new Text("Please check your network. Please retry!!!"),
+          duration: Duration(milliseconds: 1500),
         ));
       }
     } else {
       scaffkey.currentState.showSnackBar(new SnackBar(
         content: new Text("Fill all the fields!!!"),
+        duration: Duration(milliseconds: 1500),
       ));
     }
   }
@@ -103,6 +107,11 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
       case 'Diabetes':
         setState(() {
           medicalCondition = medical[2].id;
+        });
+        break;
+      case 'None':
+        setState(() {
+          medicalCondition = medical[3].id;
         });
         break;
     }
@@ -167,36 +176,42 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
                                 SizedBox(
                                   height: UIConstants.fitToHeight(20, context),
                                 ),
-                                DropdownButton<String>(
-                                  value: dropdownValue,
-                                  icon: Icon(Icons.arrow_downward),
-                                  iconSize: 24,
-                                  elevation: 16,
-                                  style: TextStyle(color: Colors.white),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.white,
+                                Container(
+                                  width: UIConstants.fitToWidth(275, context),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                  padding:
+                                      EdgeInsets.only(left: 16.0, right: 16.0),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      value: dropdownValue,
+                                      style: TextStyle(color: Colors.white),
+                                      onChanged: (String newValue) {
+                                        setState(() {
+                                          dropdownValue = newValue;
+                                          selectDropDown(dropdownValue);
+                                        });
+                                      },
+                                      items: <String>[
+                                        'None',
+                                        'Asthma',
+                                        'Blood Pressure',
+                                        'Diabetes'
+                                      ].map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(
+                                            value,
+                                            style:
+                                                TextStyle(color: Colors.black),
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
                                   ),
-                                  onChanged: (String newValue) {
-                                    setState(() {
-                                      dropdownValue = newValue;
-                                      selectDropDown(dropdownValue);
-                                    });
-                                  },
-                                  items: <String>[
-                                    'Asthma',
-                                    'Blood Pressure',
-                                    'Diabetes'
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                    );
-                                  }).toList(),
                                 ),
                                 SizedBox(
                                     height:

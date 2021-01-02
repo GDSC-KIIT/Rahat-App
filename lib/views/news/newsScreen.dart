@@ -50,6 +50,7 @@ class _NewsScreenState extends State<NewsScreen> {
             : RefreshIndicator(
                 key: refreshKey,
                 onRefresh: getAllNews,
+                color: Color(0xffF37335),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: ListView.builder(

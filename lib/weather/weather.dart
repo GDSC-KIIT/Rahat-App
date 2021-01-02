@@ -1,7 +1,9 @@
+import 'package:rahat/config.dart';
+
 import 'location.dart';
 import 'networking.dart';
 
-const apiKey = 'c598b23ae93ac54b9a2d4ec6e2746f1e';
+const apiKey = Config.WEATHER_API;
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherModel {

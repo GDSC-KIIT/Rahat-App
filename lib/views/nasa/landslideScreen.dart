@@ -28,21 +28,25 @@ class _LandslideScreenState extends State<LandslideScreen> {
             Center(
               child: Container(
                   child: Image.asset(
-                'assets/images/landslide.png',
+                'assets/images/nasa/3.png',
                 height: UIConstants.fitToHeight(100, context),
                 width: UIConstants.fitToWidth(100, context),
                 fit: BoxFit.contain,
               )),
             ),
-            const Divider(
-              color: Color(0xff494949),
-              height: 20,
-              thickness: 1.0,
-              indent: 0,
-              endIndent: 0,
+            SizedBox(height: UIConstants.fitToHeight(12, context)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: const Divider(
+                color: Color(0xff494949),
+                height: 20,
+                thickness: 1.0,
+                indent: 0,
+                endIndent: 0,
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +100,7 @@ class _LandslideScreenState extends State<LandslideScreen> {
                   ),
                   SizedBox(height: UIConstants.fitToHeight(12, context)),
                   const Divider(
-                    color: Colors.white,
+                    color: Color(0xff494949),
                     height: 20,
                     thickness: 1.0,
                     indent: 0,

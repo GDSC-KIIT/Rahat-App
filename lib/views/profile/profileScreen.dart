@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/models/User.dart';
-import 'package:rahat/views/profile/editPersonScreen.dart';
+import 'package:rahat/views/profile/editProfileScreen.dart';
 import 'package:rahat/views/profile/personScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }));
                 }),
                 SizedBox(height: UIConstants.fitToHeight(32, context)),
-                editButton(context)
+                //editButton(context)
               ],
             )),
       ),

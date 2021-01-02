@@ -29,14 +29,15 @@ class _TsunamiScreenState extends State<TsunamiScreen> {
             Center(
               child: Container(
                   child: Image.asset(
-                'assets/images/tsunami.png',
+                'assets/images/nasa/2.png',
                 height: UIConstants.fitToHeight(100, context),
                 width: UIConstants.fitToWidth(100, context),
                 fit: BoxFit.contain,
               )),
             ),
+            SizedBox(height: UIConstants.fitToHeight(12, context)),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: const Divider(
                 color: Color(0xff494949),
                 height: 20,
@@ -47,7 +48,7 @@ class _TsunamiScreenState extends State<TsunamiScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
