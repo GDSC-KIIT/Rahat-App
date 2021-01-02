@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Earthquake extends StatefulWidget {
+class FloodScreen extends StatefulWidget {
   @override
-  _EarthquakeState createState() => _EarthquakeState();
+  _FloodScreenState createState() => _FloodScreenState();
 }
 
-class _EarthquakeState extends State<Earthquake> {
+class _FloodScreenState extends State<FloodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          'Earthquake',
+          'Flood',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -27,7 +27,7 @@ class _EarthquakeState extends State<Earthquake> {
               child: Container(
                   height: 190,
                   width: 190,
-                  child: Image.asset('assets/images/earthquake.png')),
+                  child: Image.asset('assets/images/flood.png')),
             ),
             const Divider(
               color: Colors.white,
@@ -56,7 +56,7 @@ class _EarthquakeState extends State<Earthquake> {
                 Padding(
                   padding: const EdgeInsets.only(left: 3.0),
                   child: Text(
-                    '1. Take cover by getting under a sturdy table or other piece of furnitures.',
+                    '1.Turn off gas valves fed to appliances, water valves and the electricity on the main fuse box.                              ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 14.1,
@@ -69,7 +69,7 @@ class _EarthquakeState extends State<Earthquake> {
                   padding:
                       const EdgeInsets.only(top: 8.0, right: 40.0, left: 3.0),
                   child: Text(
-                    '2. Stay away from glass, windows, outside doors and walls.            ',
+                    '2. To prevent sewage backups, put sandbags in the toilet and obstructions on drain holes.            ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 14.1,
@@ -82,7 +82,7 @@ class _EarthquakeState extends State<Earthquake> {
                   padding:
                       const EdgeInsets.only(top: 6.0, left: 3.0, right: 115.0),
                   child: Text(
-                    '3. Hold on and protect your head with a pillow.        ',
+                    '3. Sop up and extract intruding waters when possible. ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 14.1,
@@ -98,7 +98,7 @@ class _EarthquakeState extends State<Earthquake> {
                     right: 110.0,
                   ),
                   child: Text(
-                    '4. Move away from tall building, trees and utility wires.                 ',
+                    '4. Strong ropes and a well equipped First Aid Kit can greatly enhance rescue efforts.        ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 14.1,
@@ -118,7 +118,7 @@ class _EarthquakeState extends State<Earthquake> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, right: 300.0),
                   child: Text(
-                    'DONT\'S -',textAlign: TextAlign.start,
+                    'DONT\'S -',
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w500,
@@ -132,7 +132,7 @@ class _EarthquakeState extends State<Earthquake> {
                 Padding(
                   padding: const EdgeInsets.only(left: 3.0),
                   child: Text(
-                    '1. Don\'t run around here and there, coming out of your houses, building.',
+                    '1. Don’t use open flames in the presence of gas, propane or natural gas. Use flashlights.                                     ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 14.1,
@@ -145,7 +145,7 @@ class _EarthquakeState extends State<Earthquake> {
                   padding:
                       const EdgeInsets.only(top: 8.0, right: 40.0, left: 3.0),
                   child: Text(
-                    '2. Never near a tree, or a building or a structure that might collapse.',
+                    '2. Watch out for and don’t approach downed power lines.           ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 14.1,
@@ -158,7 +158,7 @@ class _EarthquakeState extends State<Earthquake> {
                   padding:
                       const EdgeInsets.only(top: 6.0, left: 3.0, right: 115.0),
                   child: Text(
-                    '3. If trapped under debris, do not light a match.       ',
+                    '3. Touching or approaching wet, plugged-in electronics can lead to electrocution. ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 14.1,
@@ -174,7 +174,7 @@ class _EarthquakeState extends State<Earthquake> {
                     right: 110.0,
                   ),
                   child: Text(
-                    '4. Don\'t be on the stairs, or under them in a quake.     ',
+                    '4. Don’t drive through floodwaters. If stuck, exit the car and move to higher ground.  ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 14.1,

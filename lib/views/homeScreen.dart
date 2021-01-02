@@ -4,7 +4,7 @@ import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/models/User.dart';
 import 'package:rahat/services/authService.dart';
 import 'package:rahat/services/userService.dart';
-import 'package:rahat/views/nasa/nasapage.dart';
+import 'package:rahat/views/nasa/nasaPage.dart';
 import 'package:rahat/views/news/newsScreen.dart';
 import 'package:rahat/views/profile/profileScreen.dart';
 import 'package:rahat/views/signinScreen.dart';

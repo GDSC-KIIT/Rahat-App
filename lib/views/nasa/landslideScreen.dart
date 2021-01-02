@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:rahat/common/ui_constants.dart';
 
-class Landslide extends StatefulWidget {
+class LandslideScreen extends StatefulWidget {
   @override
-  _LandslideState createState() => _LandslideState();
+  _LandslideScreenState createState() => _LandslideScreenState();
 }
 
-class _LandslideState extends State<Landslide> {
+class _LandslideScreenState extends State<LandslideScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,37 +27,38 @@ class _LandslideState extends State<Landslide> {
           children: <Widget>[
             Center(
               child: Container(
-                  height: 190,
-                  width: 190,
-                  child: Image.asset('assets/images/landslide.png')),
+                  child: Image.asset(
+                'assets/images/landslide.png',
+                height: UIConstants.fitToHeight(100, context),
+                width: UIConstants.fitToWidth(100, context),
+                fit: BoxFit.contain,
+              )),
             ),
             const Divider(
-              color: Colors.white,
+              color: Color(0xff494949),
               height: 20,
               thickness: 1.0,
               indent: 0,
               endIndent: 0,
             ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 328.0),
-                  child: Text(
-                    'DO\'S -',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "DO'S",
                     textAlign: TextAlign.left,
-                    style: TextStyle(
+                    style: GoogleFonts.lato(
+                        textStyle: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                      color: Color(0xffF47A25),
+                    )),
                   ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 3.0),
-                  child: Text(
+                  SizedBox(height: UIConstants.fitToHeight(16, context)),
+                  Text(
                     '1. Move away from landslide path or downstream valleys quickly without wasting time.      ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -64,11 +67,7 @@ class _LandslideState extends State<Landslide> {
                       color: Colors.white,
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 8.0, right: 40.0, left: 3.0),
-                  child: Text(
+                  Text(
                     '2. Stay alert, awake and active (3A\'s) during the impact or probability of impact.  ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -77,11 +76,7 @@ class _LandslideState extends State<Landslide> {
                       color: Colors.white,
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 6.0, left: 3.0, right: 115.0),
-                  child: Text(
+                  Text(
                     '3. Keep drains clean and keep water holes open .    ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -90,14 +85,7 @@ class _LandslideState extends State<Landslide> {
                       color: Colors.white,
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 8.0,
-                    left: 3.0,
-                    right: 110.0,
-                  ),
-                  child: Text(
+                  Text(
                     '4. Locate and go to shelters and Check for injured and trapped persons .     ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -106,32 +94,26 @@ class _LandslideState extends State<Landslide> {
                       color: Colors.white,
                     ),
                   ),
-                ),
-                SizedBox(height: 10.0),
-                const Divider(
-                  color: Colors.white,
-                  height: 20,
-                  thickness: 1.0,
-                  indent: 0,
-                  endIndent: 0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, right: 300.0),
-                  child: Text(
-                    'DONT\'S -',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
+                  SizedBox(height: UIConstants.fitToHeight(12, context)),
+                  const Divider(
+                    color: Colors.white,
+                    height: 20,
+                    thickness: 1.0,
+                    indent: 0,
+                    endIndent: 0,
                   ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 3.0),
-                  child: Text(
+                  Text(
+                    "DONT'S",
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xffF47A25),
+                        )),
+                  ),
+                  SizedBox(height: UIConstants.fitToHeight(16, context)),
+                  Text(
                     '1. Do not panic and loose energy by crying and go near drainage path.                         ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -140,11 +122,7 @@ class _LandslideState extends State<Landslide> {
                       color: Colors.white,
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 8.0, right: 40.0, left: 3.0),
-                  child: Text(
+                  Text(
                     '2. Watch out for and don’t approach downed power lines.          ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -153,11 +131,7 @@ class _LandslideState extends State<Landslide> {
                       color: Colors.white,
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 6.0, left: 3.0, right: 115.0),
-                  child: Text(
+                  Text(
                     '3. Do not touch or walk over loose material and electrical wiring or pole. ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -166,14 +140,7 @@ class _LandslideState extends State<Landslide> {
                       color: Colors.white,
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 8.0,
-                    left: 3.0,
-                    right: 110.0,
-                  ),
-                  child: Text(
+                  Text(
                     '4. Do not move an injured person without rendering first aid unless important. ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -182,8 +149,8 @@ class _LandslideState extends State<Landslide> {
                       color: Colors.white,
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

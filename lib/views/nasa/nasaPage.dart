@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rahat/common/ui_constants.dart';
-import 'package:rahat/views/nasa/earthquake.dart';
-import 'package:rahat/views/nasa/flood.dart';
-import 'package:rahat/views/nasa/landslide.dart';
-import 'package:rahat/views/nasa/tsunami.dart';
+import 'package:rahat/views/nasa/earthquakeScreen.dart';
+import 'package:rahat/views/nasa/floodScreen.dart';
+import 'package:rahat/views/nasa/landslideScreen.dart';
+import 'package:rahat/views/nasa/tsunamiScreen.dart';
 
 class NasaPage extends StatefulWidget {
   @override
@@ -21,25 +21,25 @@ class _NasaPageState extends State<NasaPage> {
         menuBlock('assets/images/earthquake.png', 'Earthquake', onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Earthquake()),
+            MaterialPageRoute(builder: (context) => EarthquakeScreen()),
           );
         }),
         menuBlock('assets/images/tsunami.png', 'Tsunami', onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => tsunami()),
+            MaterialPageRoute(builder: (context) => TsunamiScreen()),
           );
         }),
         menuBlock('assets/images/landslide.png', 'Landslide', onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Landslide()),
+            MaterialPageRoute(builder: (context) => LandslideScreen()),
           );
         }),
         menuBlock('assets/images/flood.png', 'Flood', onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => flood()),
+            MaterialPageRoute(builder: (context) => FloodScreen()),
           );
         })
       ],
