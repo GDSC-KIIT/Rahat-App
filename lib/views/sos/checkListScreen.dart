@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rahat/common/ui_constants.dart';
 import 'package:rahat/models/Person.dart';
+import 'package:rahat/views/homeScreen.dart';
+import 'package:rahat/weather/location.dart';
 
 class CheckListScreen extends StatefulWidget {
   final List<Person> persons;
@@ -20,7 +22,6 @@ class _CheckListScreenState extends State<CheckListScreen> {
     super.initState();
     persons = widget.persons;
     disaster = widget.disaster;
-    print(persons);
   }
 
   @override
@@ -184,8 +185,8 @@ class _CheckListScreenState extends State<CheckListScreen> {
                               itemCount: persons.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 20, bottom: 16),
+                                  padding: const EdgeInsets.only(
+                                      left: 20, bottom: 16),
                                   child: Text(
                                     '${persons[index].medicalCondition.name}',
                                     style: TextStyle(color: Colors.white),
@@ -210,8 +211,8 @@ class _CheckListScreenState extends State<CheckListScreen> {
                                 itemCount: persons.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 16, right: 20),
+                                    padding: const EdgeInsets.only(
+                                        bottom: 16, right: 20),
                                     child: Text(
                                       '${persons[index].medicalCondition.description[0]}',
                                       textAlign: TextAlign.left,
@@ -225,8 +226,45 @@ class _CheckListScreenState extends State<CheckListScreen> {
                     )
                   ],
                 ),
-              )
+              ),
+              Align(alignment: Alignment.center, child: submitButton(context))
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget submitButton(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15),
+      child: RaisedButton(
+        onPressed: () {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (BuildContext context) {
+            return HomeScreen();
+          }), (Route<dynamic> route) => false);
+        },
+        padding: EdgeInsets.all(0.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        child: Ink(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xffFDC830), Color(0xffF37335)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              borderRadius: BorderRadius.circular(5.0)),
+          child: Container(
+            constraints: BoxConstraints(
+                maxWidth: UIConstants.fitToWidth(143, context),
+                minHeight: UIConstants.fitToHeight(43, context)),
+            alignment: Alignment.center,
+            child: Text(
+              "Done",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
