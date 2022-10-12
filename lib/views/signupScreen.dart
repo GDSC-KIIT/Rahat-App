@@ -60,12 +60,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
           setState(() {
             _loggingIn = false;
           });
-          scaffkey.currentState.showSnackBar(new SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
             content: new Text("Authentication failure !! Please retry."),
           ));
         }
       } catch (e) {
-        scaffkey.currentState.showSnackBar(new SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
           content: new Text("Authentication failure !! Please retry."),
         ));
         print(e);
@@ -156,15 +156,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SizedBox(
                               height: UIConstants.fitToHeight(30, context)),
                           (!_loggingIn)
-                              ? RaisedButton(
+                              ? ElevatedButton(
                                   onPressed: () {
                                     signup();
                                   },
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    padding: EdgeInsets.all(0),
                                   ),
-                                  textColor: Colors.white,
-                                  padding: EdgeInsets.all(0),
                                   child: Container(
                                     alignment: Alignment.center,
                                     height:
@@ -182,7 +183,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     padding: const EdgeInsets.all(10.0),
                                     child: const Text('SignUp',
                                         style: TextStyle(
-                                            fontSize: 15, letterSpacing: 0.5)),
+                                          fontSize: 15,
+                                          letterSpacing: 0.5,
+                                          color: Colors.white,
+                                        )),
                                   ),
                                 )
                               : Center(

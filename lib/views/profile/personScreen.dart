@@ -103,7 +103,7 @@ class _PersonScreenState extends State<PersonScreen> {
             title: Text('Delete!'),
             content: Text('Do you want to remove this person from the list?'),
             actions: [
-              FlatButton(
+              TextButton(
                   onPressed: () async {
                     await removePerson(person.id);
                     Navigator.of(context).pop();
@@ -112,7 +112,7 @@ class _PersonScreenState extends State<PersonScreen> {
                     'Yes',
                     style: TextStyle(color: Colors.black),
                   )),
-              FlatButton(
+              TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -129,19 +129,19 @@ class _PersonScreenState extends State<PersonScreen> {
     try {
       bool isDeleted = await PersonService.deletePerson(personId);
       if (isDeleted) {
-        scaffkey.currentState.showSnackBar(new SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
           content: new Text("Pull to refresh!!!"),
           duration: Duration(milliseconds: 1500),
         ));
       } else {
-        scaffkey.currentState.showSnackBar(new SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
           content: new Text("Failed to remove this person!!!"),
           duration: Duration(milliseconds: 1500),
         ));
       }
     } catch (e) {
       print(e);
-      scaffkey.currentState.showSnackBar(new SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
         content: new Text("Please check your network. Please retry!!!"),
         duration: Duration(milliseconds: 1500),
       ));

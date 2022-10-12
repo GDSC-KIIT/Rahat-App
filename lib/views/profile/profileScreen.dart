@@ -149,15 +149,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget editButton(context) {
     return Container(
       margin: EdgeInsets.all(15),
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (BuildContext context) {
             return EditProfileScreen();
           }));
         },
-        padding: EdgeInsets.all(0.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          padding:EdgeInsets.all(0.0),
+        ),
         child: Ink(
           decoration: BoxDecoration(
               gradient: LinearGradient(
