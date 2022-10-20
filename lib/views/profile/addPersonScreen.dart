@@ -64,7 +64,7 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
       try {
         bool isCreated = await PersonService.createPerson(payload);
         if (isCreated) {
-          scaffkey.currentState.showSnackBar(new SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
             content: new Text("Person Added!!!"),
             duration: Duration(milliseconds: 1500),
           ));
@@ -72,20 +72,20 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
             Navigator.of(context).pop();
           });
         } else {
-          scaffkey.currentState.showSnackBar(new SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
             content: new Text("Adding Person failed. Please retry!!!"),
             duration: Duration(milliseconds: 1500),
           ));
         }
       } catch (e) {
         print(e);
-        scaffkey.currentState.showSnackBar(new SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
           content: new Text("Please check your network. Please retry!!!"),
           duration: Duration(milliseconds: 1500),
         ));
       }
     } else {
-      scaffkey.currentState.showSnackBar(new SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
         content: new Text("Fill all the fields!!!"),
         duration: Duration(milliseconds: 1500),
       ));
@@ -217,14 +217,16 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
                                     height:
                                         UIConstants.fitToHeight(78, context)),
                                 (!isLoading)
-                                    ? RaisedButton(
+                                    ? ElevatedButton(
                                         onPressed: createPerson,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                          ),
+                                          padding: const EdgeInsets.all(0.0),
+                                          //textColor: Colors.white,
                                         ),
-                                        textColor: Colors.white,
-                                        padding: const EdgeInsets.all(0.0),
                                         child: Container(
                                           alignment: Alignment.center,
                                           height: UIConstants.fitToHeight(
@@ -244,6 +246,7 @@ class _AddPersonScreenState extends State<AddPersonScreen> {
                                           padding: const EdgeInsets.all(10.0),
                                           child: const Text('Create',
                                               style: TextStyle(
+                                                  color: Colors.white,
                                                   fontSize: 15,
                                                   letterSpacing: 0.5)),
                                         ),

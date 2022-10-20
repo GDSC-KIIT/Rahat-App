@@ -93,7 +93,7 @@ class _SelectPersonScreenState extends State<SelectPersonScreen> {
                               ));
                         }),
                     SizedBox(height: UIConstants.fitToHeight(28, context)),
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
@@ -103,11 +103,12 @@ class _SelectPersonScreenState extends State<SelectPersonScreen> {
                           );
                         }));
                       },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        padding: const EdgeInsets.all(0.0),
                       ),
-                      textColor: Colors.white,
-                      padding: const EdgeInsets.all(0.0),
                       child: Container(
                         alignment: Alignment.center,
                         height: UIConstants.fitToHeight(43, context),
@@ -123,7 +124,11 @@ class _SelectPersonScreenState extends State<SelectPersonScreen> {
                         ),
                         padding: const EdgeInsets.all(10.0),
                         child: const Text('NEXT',
-                            style: TextStyle(fontSize: 15, letterSpacing: 0.5)),
+                            style: TextStyle(
+                              fontSize: 15,
+                              letterSpacing: 0.5,
+                              color: Colors.white,
+                            )),
                       ),
                     )
                   ],

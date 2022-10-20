@@ -50,18 +50,18 @@ class _SignInScreenState extends State<SignInScreen> {
             setState(() {
               _loggingIn = false;
             });
-            scaffkey.currentState.showSnackBar(new SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
               content: new Text("Authentication failure !! Please retry."),
             ));
           }
         } catch (e) {
-          scaffkey.currentState.showSnackBar(new SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
             content: new Text("Authentication failure !! Please retry."),
           ));
           print(e);
         }
       } catch (e) {
-        scaffkey.currentState.showSnackBar(new SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
           content: new Text("Authentication failure !! Please retry."),
         ));
         print(e);
@@ -132,13 +132,15 @@ class _SignInScreenState extends State<SignInScreen> {
                             SizedBox(
                                 height: UIConstants.fitToHeight(78, context)),
                             (!_loggingIn)
-                                ? RaisedButton(
+                                ? ElevatedButton(
                                     onPressed: login,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      padding: const EdgeInsets.all(0.0),
                                     ),
-                                    textColor: Colors.white,
-                                    padding: const EdgeInsets.all(0.0),
                                     child: Container(
                                       alignment: Alignment.center,
                                       height:
@@ -158,6 +160,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                       padding: const EdgeInsets.all(10.0),
                                       child: const Text('Login',
                                           style: TextStyle(
+                                              color: Colors.white,
                                               fontSize: 15,
                                               letterSpacing: 0.5)),
                                     ),

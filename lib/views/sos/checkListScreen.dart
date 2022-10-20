@@ -238,15 +238,19 @@ class _CheckListScreenState extends State<CheckListScreen> {
   Widget submitButton(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(15),
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (BuildContext context) {
             return HomeScreen();
           }), (Route<dynamic> route) => false);
         },
-        padding: EdgeInsets.all(0.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(0.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
         child: Ink(
           decoration: BoxDecoration(
               gradient: LinearGradient(
